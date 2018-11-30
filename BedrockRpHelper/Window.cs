@@ -95,6 +95,7 @@ namespace BedrockRpHelper
                         ZipFile.CreateFromDirectory($"{output}/ResourcePack_{uuid}/", $"{output}/{packName.Text}.mcpack");
 
                     Directory.Delete($"{output}/ResourcePack_{uuid}", true);
+                    MessageBox.Show("Template pack generated succesfully!", "Success!", MessageBoxButtons.OK);
                 }
                 catch (IOException e)
                 {
@@ -102,7 +103,9 @@ namespace BedrockRpHelper
                 }
             }
             else
+            {
                 MessageBox.Show("You must specify an output path!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void packType_SelectedIndexChanged(object sender, EventArgs e)
