@@ -8,6 +8,10 @@ namespace BedrockRpHelper
 {
     public partial class BedrockPackHelper : Form
     {
+        public static string[] behaviorPaths = { "entities", "loot_tables", "trading" };
+        public static string[] resourcePaths = { "models", "sounds", "texts", "textures", "ui" };
+        public static string[] skinPaths = { "texts" };
+
         public BedrockPackHelper()
         {
             InitializeComponent();
@@ -85,15 +89,32 @@ namespace BedrockRpHelper
                 try
                 {
                     Directory.CreateDirectory($"{output}/ResourcePack_{uuid}");
+                    switch(packType.SelectedIndex)
+                    {
+                        case 0:
+                            GenerateFolders(behaviorPaths, output, uuid);
+                            break;
+                        case 1:
+                            GenerateFolders(resourcePaths, output, uuid);
+                            break;
+                        case 2:
+                            GenerateFolders(skinPaths, output, uuid);
+                            break;
+                    }
 
                     File.WriteAllText($"{output}/ResourcePack_{uuid}/manifest.json", jsonResult);
-                    if (iconPath.Text != "")
+                    if (iconPath.Text != string.Empty)
+                    {
                         File.Copy(icon, $"{output}/ResourcePack_{uuid}/pack_icon.png");
+                    }
                     if (exportAs.SelectedIndex == 0)
+                    {
                         ZipFile.CreateFromDirectory($"{output}/ResourcePack_{uuid}/", $"{output}/{packName.Text}.zip");
-                    else
+                    }
+                    else 
+                    {
                         ZipFile.CreateFromDirectory($"{output}/ResourcePack_{uuid}/", $"{output}/{packName.Text}.mcpack");
-
+                    }
                     Directory.Delete($"{output}/ResourcePack_{uuid}", true);
                     MessageBox.Show("Template pack generated succesfully!", "Success!", MessageBoxButtons.OK);
                 }
@@ -105,6 +126,14 @@ namespace BedrockRpHelper
             else
             {
                 MessageBox.Show("You must specify an output path!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void GenerateFolders(string[] template, string output, string uuid)
+        {
+            for (int i = 0; i < template.Length; i++)
+            {
+                Directory.CreateDirectory($"{output}/ResourcePack_{uuid}/{template[i]}");
             }
         }
 
