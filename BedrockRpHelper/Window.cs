@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
+using System.Security.AccessControl;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
@@ -8,15 +9,13 @@ namespace BedrockRpHelper
 {
     public partial class BedrockPackHelper : Form
     {
-        public static string[] behaviorPaths = { "entities", "loot_tables", "trading" };
-        public static string[] resourcePaths = { "models", "sounds", "texts", "textures", "ui" };
-        public static string[] skinPaths = { "texts" };
+        private static string[] behaviorPaths = { "entities", "loot_tables", "trading", "scripts" };
+        private static string[] resourcePaths = { "models", "sounds", "texts", "textures", "ui" };
+        private static string[] skinPaths = { "texts" };
 
         public BedrockPackHelper()
         {
             InitializeComponent();
-            packType.SelectedIndex = 0;
-            exportAs.SelectedIndex = 1;
         }
 
         private void SelectIcon_Click(object sender, EventArgs e)
@@ -27,21 +26,28 @@ namespace BedrockRpHelper
                 Filter = "Image Files (*.png;)| *.png"
             };
             if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
                 iconPath.Text = fileDialog.FileName;
+            }
         }
 
         private void selectOutputPath_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog browserDialog = new FolderBrowserDialog();
             if(browserDialog.ShowDialog() == DialogResult.OK)
+            {
                 outputPath.Text = browserDialog.SelectedPath;
+            }
         }
 
         private void Generate_Click(object sender, EventArgs e)
         {
-            MainJson json = new MainJson();
-            json.modules = new Modules[1];
+            MainJson json = new MainJson
+            {
+                modules = new Modules[1]
+            };
             json.header.version = new int[3];
+            json.header.minEngineVersion = new int[3];
             json.modules[0].version = new int[3];
 
             json.formatVersion = 1;
@@ -53,6 +59,10 @@ namespace BedrockRpHelper
             json.header.version[0] = Convert.ToInt32(packVersionMajor.Text);
             json.header.version[1] = Convert.ToInt32(packVersionMinor.Text);
             json.header.version[2] = Convert.ToInt32(packVersionPatch.Text);
+
+            json.header.minEngineVersion[0] = Convert.ToInt32(minEngineVersionMajor.Text);
+            json.header.minEngineVersion[1] = Convert.ToInt32(minEngineVersionMinor.Text);
+            json.header.minEngineVersion[2] = Convert.ToInt32(minEngineVersionPatch.Text);
 
             switch (packType.SelectedIndex)
             {
@@ -83,12 +93,13 @@ namespace BedrockRpHelper
 
         private void GenerateFiles(string jsonResult, string output, string icon)
         {
-            if (outputPath.Text != "")
+            if (outputPath.Text != string.Empty)
             {
                 string uuid = Guid.NewGuid().ToString();
                 try
                 {
                     Directory.CreateDirectory($"{output}/ResourcePack_{uuid}");
+
                     switch(packType.SelectedIndex)
                     {
                         case 0:
@@ -140,9 +151,13 @@ namespace BedrockRpHelper
         private void packType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (packType.SelectedIndex == 2)
+            {
                 packDescription.Enabled = false;
+            }
             else
+            {
                 packDescription.Enabled = true;
+            }
         }
 
         private void TextboxKeyDown(object sender, KeyPressEventArgs e)
@@ -151,6 +166,13 @@ namespace BedrockRpHelper
             {
                 e.Handled = true;
             }
+        }
+
+        private void BedrockPackHelper_Load(object sender, EventArgs e)
+        {
+            packType.SelectedIndex = 0;
+            exportAs.SelectedIndex = 1;
+            outputPath.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Packages\\Microsoft.MinecraftUWP_8wekyb3d8bbwe\\LocalState\\games\\com.mojang\\development_resource_packs");
         }
     }
 }

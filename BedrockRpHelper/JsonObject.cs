@@ -27,6 +27,8 @@ namespace BedrockRpHelper
         public string uuid;
         [JsonProperty("version")]
         public int[] version;
+        [JsonProperty("min_engine_version")]
+        public int[] minEngineVersion;
     }
 
     public struct Modules

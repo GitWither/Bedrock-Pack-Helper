@@ -50,6 +50,12 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.exportAs = new System.Windows.Forms.ComboBox();
+            this.minEngineVersionPatch = new System.Windows.Forms.TextBox();
+            this.minEngineVersionMinor = new System.Windows.Forms.TextBox();
+            this.minEngineVersionMajor = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // packName
@@ -87,7 +93,7 @@
             // 
             this.Generate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Generate.Location = new System.Drawing.Point(16, 376);
+            this.Generate.Location = new System.Drawing.Point(16, 417);
             this.Generate.Name = "Generate";
             this.Generate.Size = new System.Drawing.Size(325, 23);
             this.Generate.TabIndex = 11;
@@ -203,7 +209,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(13, 247);
+            this.label7.Location = new System.Drawing.Point(12, 290);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(59, 13);
             this.label7.TabIndex = 14;
@@ -213,7 +219,7 @@
             // 
             this.iconPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.iconPath.Location = new System.Drawing.Point(16, 263);
+            this.iconPath.Location = new System.Drawing.Point(16, 309);
             this.iconPath.Name = "iconPath";
             this.iconPath.Size = new System.Drawing.Size(292, 20);
             this.iconPath.TabIndex = 6;
@@ -221,7 +227,7 @@
             // SelectIcon
             // 
             this.SelectIcon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SelectIcon.Location = new System.Drawing.Point(314, 261);
+            this.SelectIcon.Location = new System.Drawing.Point(314, 307);
             this.SelectIcon.Name = "SelectIcon";
             this.SelectIcon.Size = new System.Drawing.Size(27, 23);
             this.SelectIcon.TabIndex = 7;
@@ -232,7 +238,7 @@
             // selectOutputPath
             // 
             this.selectOutputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.selectOutputPath.Location = new System.Drawing.Point(314, 301);
+            this.selectOutputPath.Location = new System.Drawing.Point(314, 347);
             this.selectOutputPath.Name = "selectOutputPath";
             this.selectOutputPath.Size = new System.Drawing.Size(27, 23);
             this.selectOutputPath.TabIndex = 9;
@@ -244,7 +250,7 @@
             // 
             this.outputPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.outputPath.Location = new System.Drawing.Point(16, 302);
+            this.outputPath.Location = new System.Drawing.Point(16, 348);
             this.outputPath.Name = "outputPath";
             this.outputPath.Size = new System.Drawing.Size(292, 20);
             this.outputPath.TabIndex = 8;
@@ -252,7 +258,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(13, 286);
+            this.label8.Location = new System.Drawing.Point(13, 332);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(87, 13);
             this.label8.TabIndex = 17;
@@ -261,7 +267,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(13, 325);
+            this.label9.Location = new System.Drawing.Point(13, 371);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(55, 13);
             this.label9.TabIndex = 18;
@@ -276,16 +282,79 @@
             this.exportAs.Items.AddRange(new object[] {
             "Archive",
             "Minecraft Pack"});
-            this.exportAs.Location = new System.Drawing.Point(15, 341);
+            this.exportAs.Location = new System.Drawing.Point(15, 387);
             this.exportAs.Name = "exportAs";
             this.exportAs.Size = new System.Drawing.Size(325, 21);
             this.exportAs.TabIndex = 10;
+            // 
+            // minEngineVersionPatch
+            // 
+            this.minEngineVersionPatch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.minEngineVersionPatch.Location = new System.Drawing.Point(152, 265);
+            this.minEngineVersionPatch.Name = "minEngineVersionPatch";
+            this.minEngineVersionPatch.Size = new System.Drawing.Size(62, 20);
+            this.minEngineVersionPatch.TabIndex = 21;
+            this.minEngineVersionPatch.Text = "0";
+            // 
+            // minEngineVersionMinor
+            // 
+            this.minEngineVersionMinor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.minEngineVersionMinor.Location = new System.Drawing.Point(84, 265);
+            this.minEngineVersionMinor.Name = "minEngineVersionMinor";
+            this.minEngineVersionMinor.Size = new System.Drawing.Size(62, 20);
+            this.minEngineVersionMinor.TabIndex = 20;
+            this.minEngineVersionMinor.Text = "8";
+            // 
+            // minEngineVersionMajor
+            // 
+            this.minEngineVersionMajor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.minEngineVersionMajor.Location = new System.Drawing.Point(16, 265);
+            this.minEngineVersionMajor.Name = "minEngineVersionMajor";
+            this.minEngineVersionMajor.Size = new System.Drawing.Size(62, 20);
+            this.minEngineVersionMajor.TabIndex = 19;
+            this.minEngineVersionMajor.Text = "1";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(13, 249);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(125, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Minimum Engine Version:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(76, 272);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(10, 13);
+            this.label11.TabIndex = 23;
+            this.label11.Text = ".";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(144, 272);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(10, 13);
+            this.label12.TabIndex = 24;
+            this.label12.Text = ".";
             // 
             // BedrockPackHelper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(353, 403);
+            this.ClientSize = new System.Drawing.Size(353, 444);
+            this.Controls.Add(this.minEngineVersionPatch);
+            this.Controls.Add(this.minEngineVersionMinor);
+            this.Controls.Add(this.minEngineVersionMajor);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.exportAs);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.selectOutputPath);
@@ -311,6 +380,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "BedrockPackHelper";
             this.Text = "Bedrock Pack Helper";
+            this.Load += new System.EventHandler(this.BedrockPackHelper_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -340,6 +410,12 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox exportAs;
+        private System.Windows.Forms.TextBox minEngineVersionPatch;
+        private System.Windows.Forms.TextBox minEngineVersionMinor;
+        private System.Windows.Forms.TextBox minEngineVersionMajor;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
     }
 }
 
