@@ -9,7 +9,7 @@ namespace BedrockRpHelper
     public partial class BedrockPackHelper : Form
     {
         private static string[] behaviorPaths = { "entities", "loot_tables", "trading", "scripts" };
-        private static string[] resourcePaths = { "models", "sounds", "texts", "textures", "ui" };
+        private static string[] resourcePaths = { "models", "sounds", "texts", "textures", "ui", "experimental_ui", "animations", "render_controllers", "entity", "animation_controllers" };
         private static string[] skinPaths = { "texts" };
 
         public BedrockPackHelper()
