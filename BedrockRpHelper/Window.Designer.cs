@@ -93,7 +93,7 @@
             // 
             this.Generate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Generate.Location = new System.Drawing.Point(16, 417);
+            this.Generate.Location = new System.Drawing.Point(15, 417);
             this.Generate.Name = "Generate";
             this.Generate.Size = new System.Drawing.Size(325, 23);
             this.Generate.TabIndex = 11;
@@ -139,7 +139,8 @@
             this.packType.Items.AddRange(new object[] {
             "Behavior Pack",
             "Resource Pack",
-            "Skin Pack"});
+            "Skin Pack",
+            "World Template"});
             this.packType.Location = new System.Drawing.Point(16, 184);
             this.packType.Name = "packType";
             this.packType.Size = new System.Drawing.Size(325, 21);
@@ -281,7 +282,8 @@
             this.exportAs.FormattingEnabled = true;
             this.exportAs.Items.AddRange(new object[] {
             "Archive",
-            "Minecraft Pack"});
+            "Minecraft Pack",
+            "Folder"});
             this.exportAs.Location = new System.Drawing.Point(15, 387);
             this.exportAs.Name = "exportAs";
             this.exportAs.Size = new System.Drawing.Size(325, 21);
@@ -305,7 +307,7 @@
             this.minEngineVersionMinor.Name = "minEngineVersionMinor";
             this.minEngineVersionMinor.Size = new System.Drawing.Size(62, 20);
             this.minEngineVersionMinor.TabIndex = 20;
-            this.minEngineVersionMinor.Text = "8";
+            this.minEngineVersionMinor.Text = "11";
             // 
             // minEngineVersionMajor
             // 

@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
 using System.IO.Compression;
-using System.Security.AccessControl;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 
 namespace BedrockRpHelper
 {
@@ -34,7 +33,7 @@ namespace BedrockRpHelper
         private void selectOutputPath_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog browserDialog = new FolderBrowserDialog();
-            if(browserDialog.ShowDialog() == DialogResult.OK)
+            if (browserDialog.ShowDialog() == DialogResult.OK)
             {
                 outputPath.Text = browserDialog.SelectedPath;
             }
@@ -53,8 +52,8 @@ namespace BedrockRpHelper
             json.formatVersion = 1;
 
             json.header.name = packName.Text;
-            if(packType.SelectedIndex != 2)
-            json.header.description = packDescription.Text;
+            if (packType.SelectedIndex != 2)
+                json.header.description = packDescription.Text;
             json.header.uuid = Guid.NewGuid().ToString();
             json.header.version[0] = Convert.ToInt32(packVersionMajor.Text);
             json.header.version[1] = Convert.ToInt32(packVersionMinor.Text);
@@ -74,6 +73,9 @@ namespace BedrockRpHelper
                     break;
                 case 2:
                     json.modules[0].type = "skin_pack";
+                    break;
+                case 3:
+                    json.modules[0].type = "world_template";
                     break;
                 default:
                     json.modules[0].type = "resources";
@@ -100,7 +102,7 @@ namespace BedrockRpHelper
                 {
                     Directory.CreateDirectory($"{output}/ResourcePack_{uuid}");
 
-                    switch(packType.SelectedIndex)
+                    switch (packType.SelectedIndex)
                     {
                         case 0:
                             GenerateFolders(behaviorPaths, output, uuid);
@@ -114,19 +116,26 @@ namespace BedrockRpHelper
                     }
 
                     File.WriteAllText($"{output}/ResourcePack_{uuid}/manifest.json", jsonResult);
+
                     if (iconPath.Text != string.Empty)
                     {
                         File.Copy(icon, $"{output}/ResourcePack_{uuid}/pack_icon.png");
                     }
+
                     if (exportAs.SelectedIndex == 0)
                     {
                         ZipFile.CreateFromDirectory($"{output}/ResourcePack_{uuid}/", $"{output}/{packName.Text}.zip");
+                        Directory.Delete($"{output}/ResourcePack_{uuid}", true);
                     }
-                    else 
+                    else if (exportAs.SelectedIndex == 1)
                     {
                         ZipFile.CreateFromDirectory($"{output}/ResourcePack_{uuid}/", $"{output}/{packName.Text}.mcpack");
+                        Directory.Delete($"{output}/ResourcePack_{uuid}", true);
                     }
-                    Directory.Delete($"{output}/ResourcePack_{uuid}", true);
+                    else
+                    {
+                        Directory.Move($"{output}/ResourcePack_{uuid}", $"{output}/{packName.Text}");
+                    }
                     MessageBox.Show("Template pack generated succesfully!", "Success!", MessageBoxButtons.OK);
                 }
                 catch (IOException e)
@@ -162,7 +171,7 @@ namespace BedrockRpHelper
 
         private void TextboxKeyDown(object sender, KeyPressEventArgs e)
         {
-            if(!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
